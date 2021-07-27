@@ -13,7 +13,7 @@ navbar:
           href: lubywork.html
         - text: Other work
           href: other.html
-    - text: Academic Coursework
-      href: courses.html
+   # - text: Academic Coursework
+    #  href: courses.html
 theme: theme.css
 output: distill::distill_article
