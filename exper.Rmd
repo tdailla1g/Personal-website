@@ -1,0 +1,15 @@
+---
+title: "Research Experience"
+description: "A bit about the work I've done"
+---
+
+# Summer 2021 {-}
+During the summer of 2021 I'm working with Professor Amanda Luby at Swarthmore college. My team and I are working to better understand and model how fingerprint examiners compare prints as part of a project sponsored by the Center for Statistics and Applications in Forensic Evidence. I'm designing a clustering algorithm that incorporates ideas from cultural consensus theory to isolate critical points on a print and allow us to extract information about examiner proficiency all from print annotations without being able to see the prints ourselves.
+
+# 2020-21 Academic Year {-}
+I spent the year working with the Movement Advancement Project, the second largest think tank focused on LGBTQ issues in the US. There I did research for the public policy team, which involved both statistical and legal analysis of key policy issues. <!-- I'd need to add some more details-->
+
+# Other Work {-}
+As part of my academic coursework I've completed a number of semester long projects in areas including operations research, linguistics, and psychology. <!-- I should detail these projects a bit-->
+
+

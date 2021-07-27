@@ -1,0 +1,16 @@
+---
+title: "Thomas Daillak"
+image: "Thomas.jpg"
+links:
+  - label: LinkedIn
+    url: "https://www.linkedin.com/in/thomas-daillak-b314081b3"
+  - label: Email
+    url: "mailto:tdailla1@swarthmore.edu"
+  - label: Resume
+    url: "https://drive.google.com/file/d/1QBuz7hip2v4MutM1r0bpyjFJmpk5NDOQ/view?usp=sharing"
+output:
+  postcards::trestles
+site: distill::distill_website
+---
+ 
+I am a senior at Swarthmore college pursuing an honors major in mathematics with minors in linguistics and economics. I'm interested in both theoretical and applied math (including statistics) and particularly enjoy applications that allow me to blend the two. In my free time I do yoga, knit and bake all sorts of desserts. 

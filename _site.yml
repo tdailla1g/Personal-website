@@ -1,0 +1,19 @@
+name: "Personal website"
+title: "Thomas Daillak"
+description: |
+  My Website
+output_dir: "docs"
+navbar:
+  right:
+    - text: Research Experience
+      menu:
+        - text: Overview
+          href: exper.html
+        - text: Clustering using CCT
+          href: lubywork.html
+        - text: Other work
+          href: other.html
+    - text: Academic Coursework
+      href: courses.html
+theme: theme.css
+output: distill::distill_article

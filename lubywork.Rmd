@@ -1,0 +1,128 @@
+---
+title: "Cultural Consensus Theory (CCT) Based Clustering"
+description: "The following documents my work with Professor Amanda Luby during the summer of 2021"
+---
+Coming soon! <!--I need to convert what's below-->
+<<!-- The white box study was conceived to help clarify the reasons for which fingerprint examiners were designating certain print pairs as matched and others and non-matched. Thus we have a great deal of data regarding the annotations made in the examination process. That being said the original study leaves much of that data untouched. My intention is to address that by extracting as much information as possible about the key properties of the prints and the proficiencies of the examiners from the annotations.
+
+\section*{What does the data look like}
+If you navigate to the \emph{Markup} tab of the Whitebox data you'll find everything we have recorded on examiner annotations. In particular, we have the XY coordinates of any annotation made as well as whether the feature indicated was a minutia, core or delta and the clarity of that feature. In total that amounts to 112,758 observations from 170 examiners each of whom saw a subset of the 320 prints considered. However, because fingerprints are confidential, we have no way of overlaying the annotations on a particular print. Thus our challenge is to determine which annotations indicate key features of the print, and how skilled examiners are at identifying those points without having any prior knowledge of what counts as a "good" answer.
+\begin{figure}
+  \centering
+  \begin{subfigure}[!]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Print010Annot.png}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[!]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Print020Annot.png}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[!]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Print025Annot.png}
+  \end{subfigure}
+\caption{Examples of our data on annotations for three different fingerprints}
+\end{figure}
+
+\section*{Initial approach}
+At the first stage in planning the idea was to use a cultural consensus theory (CCT) based model to handle the quirks in our data. I've specified that model below but before we get there, I'll give a brief description of what CCT is:
+
+IRT provides a way of disentangling test taker proficiency and question difficulty so that we can extract information about individuals from their test scores. However it requires us to be able to score those tests, that is for us to have a concept of the right answer to each question. CCT was initially proposed as a form of "IRT without an answer key." Using CCT we can determine what the consensus answer key is to a set of questions and how strong an individual respoondent's grasp of that consensus is, even knowing nothing going in. The CCT model works by using responses to estimate the consensus truth (which we view as a set of latent variables), each respondent's cultural competence and response bias, as well as each question's cultural salience (difficulty).\footnote{The most basic CCT model is the General Condorcet Model (GCM). In this model responses are binary, conditionally independent, and marginal probabilities are determined by a sequence of Bernoulli trials as outlined in Batchelder (2018). The proficiencies and difficulties are estimated by an embedded Rasch model.} %Maybe more
+
+In the case of our data we initially viewed examiner annotations as their perception of the set of key minutia in any given print. Then a CCT model would have allowed us determine the consensus set of points in a print that were of most importance and measure an examiner's ability to recognize these points. The first model was as follows:
+\begin{center}
+\fbox{\parbox{\textwidth}{%
+\begin{center}{\bf{Person parameters:}} $\theta_p$ for examiner proficiency, $b_p$ for examiner bias in individual minimal salience level for marked points.\\
+{\bf{Item parameters:}} $Z_i$ for the true location of the underlying minutiae, $\psi_i$ for the salience of the minutiae denoted by $Z_i$.\\
+{\bf{Other parameters:}} $\gamma$ for the cultural cutoff point shared by all examiners, $\Sigma$ for the covariance matrix helping determine where about $Z_i$ an examiner marks the minutiae, $\alpha, \beta$ for a scaling parameters.\end{center}
+
+Now suppose for each examiner $p$ we draw a number $n_p \sim Poisson(\frac{\alpha}{\theta_p})$ specifying the number of false annotations $\{Y_{pi}\}^{n_p}\sim Uniform(A)$ an examiner makes over the print area $A$.In addition to these false markings each examiner $p$ will mark some subset of the points $Z_i$. To determine if an examiner perceives a particular point $Z_i$ we draw $\psi_{pi}\sim N(\psi_i,\frac{\beta}{\theta_p})$. If $\psi_{pi}\geq\gamma +b_p$ then examiner $p$ perceives the point $Z_i$ which they will indicate by marking a point $X_{pi}\sim \mathcal{N}(Z_i,\Sigma)$ representative of $Z_i$. Thus the set of points an examiner marks is $\{Y_{pi}\}\cup\{X_{pi}\}$ a combination of the true points they perceive and noise points they invent.
+}}\end{center}
+
+Unfortunately we ran into a major issue, even if we could filter noisy points from real ones there was no immediate way to associate a given annotation with an underlying point of interest (and thus no way to match questions and responses). One solution we came up with was to reconceptualize the model by discretizing the sample space and thinking of each cell as a question with binary response determined by whether or not a point was marked in that cell. This would reduce the problem to a more traditional CCT application, but we worried that a useful solution would be computationally intractable. Thus we decided to pursue other avenues first, beginning with the use of clustering algorithms.
+
+\section*{Clustering algorithms}
+The idea was to first group our data into clusters, each of which corresponds to a question. That way we have both an explicit list of questions and a way to associate examiner annotations to those questions. That would allow us to create a simple binary response matrix that could be analyzed by more classical methods. We were able to implement this model in practice using a simplified version of the model discussed above on a single print sample (CCT analysis was unsuccessful likely because the sample dataset was too small to support it). This first attempt- which I outline below- had a number of flaws, but that is to be expected.
+%Maybe I can put more explicit details in the footnotes (selective inference)
+%I need to describe the model
+
+\begin{center}
+\fbox{\parbox{\textwidth}{%
+Given the set of annotations $X$ apply the DBSCAN clustering algorithm to $X$ to derive $K$ clusters. Now create a test matrix $A$ with a row for each of the $I$ examiners and a column for each cluster. Populate the matrix by setting $a_{ik}=1$ if examiner $i$ made an annotation that was assigned to cluster $k$ and setting $a_{ik}=0$ otherwise. We run the following model on the resulting data:
+\begin{center}
+  {\bf{Person parameters:}} $\theta_p$ for examiner proficiency, $b_p$ for examiner bias in individual minimal salience level for marked points.\\
+  {\bf{Item parameters:}} $\psi_i$ for the salience of the minutiae denoted by $Z_i$.\\
+  {\bf{Other parameters:}} $\gamma$ for the cultural cutoff point shared by all examiners, $\alpha$ for a scaling parameters.
+\end{center}
+
+We give to each examiner an individual cutoff level $\gamma_p = \gamma +b_p$ and then we model each response in our matrix as a Bernoulli random variable with $p_{pi}$ equal to the probability that $\psi_{pi}\sim N(\psi_i,\frac{\alpha}{\theta_p})$ is greater than $\gamma_p$.
+
+}}\end{center}
+
+These issues include a degree of over simplification, wide confidence intervals and little difference between estimated parameters, and problems with selective inference.\footnote{Selective inference refers to the problem of testing the significance of a particular feature in your data when you've in some way selected for the strongest features.} Addressing them will require us to integrate the clustering and modeling stages to some extent. Ideally we could fully merge these two steps, but even if that's not possible we'll need to modify the algorithms directly. To that end I expand on the three algorithms under consideration. These three were chosen because they are widely applicable and well understood approaches to clustering that are effective and of minimal computational load for low dimensional data. Additionally their design allows for flexibility in implementation that we can most easily exploit to suit our data. %Maybe be more precise
+
+%Now I get to turn all those alg notes into a couple descriptions. I'd also like to reference the other reading i did
+\subsection*{Hierarchical clustering}
+This is a family of clustering algorithms that takes in a set of points and a matrix of distances between them. Initially each point is placed in it's own cluster, and at each stage the algorithm merges the two nearest clusters (using a linkage rule that defines the distance between clusters in terms of the distance between their component points). This creates a dendrogram that we choose to cut at a particular height (based on a variety of heuristics), which in turn gives us our clustering. Alternatively we can set a halting condition based on the number of clusters or on a threshold value for linkage.
+%Add an example right Here
+
+The use of a distance function, linkage rule, and halting condition give us meaningful ways to adjust the algorithm to work best with our data. For example we might mark points from the same examiner as maximally far apart. Additionally, methods have already been proposed to correct for selective inference when testing using clusters derived from this approach. In fact for simple linkage rules there is even a closed form expression for this correction. That being said the previous work is for a test of difference in means, which will differ from our approach. Furthermore the algorithm itself is relatviely slow, taking $\mathcal{O}(n^3)$ time.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.5\textwidth]{hierclus.png}
+  \caption{Visualization of a simple hierarchical clustering application from \emph{statisticshowto.com}}
+\end{figure}
+
+\subsection*{DBSCAN}
+A more widely used clustering algoirhtm in the world of computer science is Density Based Spatial Clustering of Applications with noise (DBSCAN). Unlike either of the other two options, the algorithm is explicitly equipped to deal with outliers. That means we don't have the additional step of having to discard clusters below a certain size. DBSCAN also takes in a set of points and a set of distances between them, but it also requires the user to select two values, $minPts$ and $\epsilon$. These values determine the minimum number of points required to form a  cluster and the requisite density respectively. The algorithm begins by selecting an arbitrary point $p$ from the data and retrieving the set of points within its $\epsilon$ neighborhood. If there are fewer than $minPts$ in this set then the point is marked as noise (though this designation can be revised), other wise a cluster is formed. To that cluster we add all points $p'$ in $B_\epsilon(p)$; furthermore for each point $p'$ added to the cluster we consider the number of points in $B_\epsilon(p')$, and if it is greater than $minPts$ we add all the points in $B_\epsilon(p')$ to the cluster as well. We repeat until there are no points left to be added to the cluster, and then we begin the process again with an arbitrary unclassified point.
+
+The major benefits to the DBSCAN algorithm are it's speed and it's robustness to both noise and the single lin effect (that is when different clusters are merged because a small subset of points on their edges are close together). It also incorporates a distance function that we might be able to exploit, but in all likelihood we would need to do a bit morerewriting of the algorithm than that to optimize it for our data. The cons include the fact that DBSCAN struggles when clusters have differing densities (though the OPTICS variant of the algorithm does not), the somehwat arbitrary choice of $\epsilon$ and $minPts$ and less well flushed out statistical understanding of the algorithm. %I should add a footnote about the article I read
+%Again an example would be nice to include here
+
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[h]{0.475\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{dbclus.png}
+    \subcaption{Types of points considered by the DBSCAN algorithm. Image from \emph{mineracaodedados.wordpress.com}}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[h]{0.475\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{dbclustex.png}
+    \subcaption{A convex hull plot generated from a DBSCAN clustering of annotations to a single print}
+  \end{subfigure}
+  \caption{Visualizations for DBSCAN}
+\end{figure}
+
+\subsection*{ToMATo}
+The last algorithm we’re considering is the Topological Mode Analysis Tool (ToMATo). It’s a version of the classical Topological Data Analysis (TDA) approach to clustering that is more well suited to our goal. In classical TDA we look at the persistence of connected components in increasingly wide $\check{\text{c}}$ech complexes made from the data. When applying the ToMATo algorithm we go through a slighlty different process twice. The first pass creates a persistence diagram equivalent to the one from classical TDA analysis, it is used simply to determine how many significant cluster there are in the data. For the second pass we choose a value of $\tau$ (our merging parameter) that ensures we end up with the appropriate number of clusters.
+
+In practice the algorithm works as follows. We input a graph constructed from our observed data where each response is a vertex and vertices are connected by edges if they meet some requirement for proximity that we choose. Furthermore each vertex is assigned an $\hat{f}$ value that approximates a Morse function $f$ on the data (a measure of density is usually used). Then we create a spanning forrest for the graph by grouping each vertex $v$ with its neighbor with the highest $\hat{f}$ value until we reach a point with higher $\hat{f}$ values than all its neighbors. Then for each tree we determine the highest $\hat{f}$ value for it's component vertices. If this is greater than $\tau$ we do nothing. If there is a neighboring tree (connected by at least one edge) with a higher maximum $\hat{f}$ value we group those trees together. Otherwise we ignore that tree. After this merging process is complete we have our clusters.
+
+The influence the input graph has on the outcome, and we have on the input graph (as well as the density function) gives us a meaningul way to play with the algorithm. There is more statistical literature on TDA than there is on DBSCAN which means less work for us. The algorithm is also rather efficient. On the other hand the ToMATo algorithm is not as widely used as more classical TDA model, and the machinery involved is the most complex amongst our options. The method also isn't particulalry well suited to handle noise.
+%I think the example image will be particularly important here
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{tomatoclus.png}
+  \caption*{From \emph{Persistence Clustering on Riemannian Manifolds}, Chazal et al. 2013}
+\end{figure}
+%\section*{Statistical analysis of clusters}
+
+\section*{Next steps}
+%I gotta go through what we want to focus on
+%How to get them not to cluster pt from same examiner
+%How to make the statistics line up
+%How to incorporate CCT into Clustering
+%How we want to use it going forward in this project and elsewhere
+
+Over the course of the next month I hope to spend time adjusting these clustering algorithms to better fit our data. At the immediate level that means adjusting the distance and connectivity metrics to prevent points from the same examiners from being grouped and to best capture similarity. It also means investigating the statistical behavior of these new algorithms and how to appropriately make a correction to our model p-values. More ambitiously, once I've come understand both of these pieces, I'd like to fully combine the clustering and modeling step.
+
+That would mean we would approach the clustering informed by what I think is a key piece of CCT, namely that some respondents opinions are more valuable than others. This should allow us to more accurately identify the key points on a print, and simultaneously give us a measure of examiner proficiency. That would mean we could apply this method to the annotation data as a way to scrape more information out of the data we have. It would also provide an interesting approach to clustering based on labels of various quality that could be quite useful in other applications.
+
+\end{document}
+-->

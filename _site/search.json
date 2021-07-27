@@ -1,0 +1,42 @@
+{
+  "articles": [
+    {
+      "path": "courses.html",
+      "title": "Selected Coursework",
+      "author": [],
+      "contents": "\nCurrent and upcoming courses\nCurrent\nHappy summer everyone!\nUpcoming\n\nBehavioral and Experimental Economics\n\nA seminar in behavioral economics with applications. Topics include: self-control problems in financial behavior, preferences regarding inequality and fairness, cooperative behavior, social preferences, and consumer decision making.\n\nReal Analysis II\n\nA seminar in real analysis at the level of a first graduate course. Topics include the inverse and implicit function theorems, differential forms, calculus on manifolds, measurability, and Lebesgue integration.\nPrior courses\nMathematics\n\nModern Algebra II\n\nA seminar in algebra at the level of a first graduate course. Topics covered include field theory, Galois theory (including the insolvability of the quintic), the Sylow theorems and an introduction to representation theory.\n\nTopology\n\nA double credit seminar in topology at the level of a first graduate course. Topics include an introduction to point-set, combinatorial, and algebraic topology: topological spaces, classification of surfaces, the fundamental group, covering spaces, simplicial complexes, and homology (including related algebra).\n\nComplex Analysis\n\nA seminar in complex analysis at the level of a first graduate course. Topics include analytic functions of a complex variable, Cauchy’s theorem, power series, residue calculus, conformal mapping, harmonic functions, analytic continuation, elliptic functions, and the theory of Weierstrass.\n\nMathematical Statistics II\n\nA seminar in mathematical statistics at the level of a first graduate course. Topics include parameter estimation, confidence intervals and hypothesis testing, linear regression methods, Bayesian inference, generalized linear models, and nonparametric statistics.\n\nNumerical Analysis and Stochastics Methods\n\nAn advanced course in applied mathematics\nEconomics\n\nIntermediate microeconomics\n\nOperations Research\nLinguistics\n\nLanguage Learning and Development\n\nA seminar in language acquisition.\n\nStructure of Wamesa\n\nModality and Language\nOther\n\nAlgorithms\n\nAn advanced course in algorithmic design. Topics covered include abstract data types, trees (including balanced trees), graphs, searching, sorting, NP complete optimization problems, and the impact of several models of parallel computation on the design of algorithms and data structures.\n\n\n\n",
+      "last_modified": "2021-06-29T13:23:42-04:00"
+    },
+    {
+      "path": "exper.html",
+      "title": "Research Experience",
+      "description": "A bit about the work I've done",
+      "author": [],
+      "contents": "\nSummer 2021\nDuring the summer of 2021 I’m working with Professor Amanda Luby at Swarthmore college. My team and I are working to better understand and model how fingerprint examiners compare prints as part of a project sponsored by the Center for Statistics and Applications in Forensic Evidence. I’m designing a clustering algorithm that incorporates ideas from cultural consensus theory to isolate critical points on a print and allow us to extract information about examiner proficiency all from print annotations without being able to see the prints ourselves.\n2020-21 Academic Year\nI spent the year working with the Movement Advancement Project, the second largest think tank focused on LGBTQ issues in the US. There I did research for the public policy team, which involved both statistical and legal analysis of key policy issues. \nOther Work\nAs part of my academic coursework I’ve completed a number of semester long projects in areas including operations research, linguistics, and psychology. \n\n\n\n",
+      "last_modified": "2021-06-29T13:23:43-04:00"
+    },
+    {
+      "path": "index.html",
+      "title": "Thomas Daillak",
+      "author": [],
+      "contents": "\n\n          \n          \n          Thomas Daillak\n          \n          \n          \n          \n          Research Experience\n           \n          ▾\n          \n          \n          Overview\n          Clustering using CCT\n          Other work\n          \n          \n          Academic Coursework\n          ☰\n          \n          \n      \n        \n          \n            \n              \n            \n              Thomas Daillak\n            \n            \n              \n                \n                    \n                      \n                        LinkedIn\n                      \n                    \n                  \n                                    \n                    \n                      \n                        Email\n                      \n                    \n                  \n                                    \n                    \n                      \n                        Resume\n                      \n                    \n                  \n                                  \n            \n          \n        \n        \n        \n          \n            I am a senior at Swarthmore college pursuing an honors major in mathematics with minors in linguistics and economics. I’m interested in both theoretical and applied math (including statistics) and particularly enjoy applications that allow me to blend the two. In my free time I do yoga, knit and bake all sorts of desserts.\n          \n        \n      \n    \n\n    \n      \n        \n          \n            \n              \n            \n              Thomas Daillak\n            \n            \n              \n                \n                                    \n                    \n                      LinkedIn\n                    \n                  \n                                    \n                    \n                      Email\n                    \n                  \n                                    \n                    \n                      Resume\n                    \n                  \n                                  \n              \n            \n            \n              I am a senior at Swarthmore college pursuing an honors major in mathematics with minors in linguistics and economics. I’m interested in both theoretical and applied math (including statistics) and particularly enjoy applications that allow me to blend the two. In my free time I do yoga, knit and bake all sorts of desserts.\n            \n        \n      \n    \n\n    \n    \n    ",
+      "last_modified": "2021-06-29T13:23:44-04:00"
+    },
+    {
+      "path": "lubywork.html",
+      "title": "Cultural Consensus Theory (CCT) Based Clustering",
+      "description": "The following documents my work with Professor Amanda Luby during the summer of 2021",
+      "author": [],
+      "contents": "\nComing soon! \n\n\nHello world \\emph{Hi}\n\n\n\n\n",
+      "last_modified": "2021-07-12T15:37:43-04:00"
+    },
+    {
+      "path": "other.html",
+      "title": "Other Work",
+      "author": [],
+      "contents": "\nComing soon! \n\n\n\n",
+      "last_modified": "2021-06-29T13:23:45-04:00"
+    }
+  ],
+  "collections": []
+}

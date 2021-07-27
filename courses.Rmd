@@ -1,0 +1,74 @@
+---
+title: "Selected Coursework"
+---
+
+# Current and upcoming courses {-}
+## Current {-}
+Happy summer everyone!
+
+## Upcoming {-}
+<details>
+  <summary>Behavioral and Experimental Economics</summary>
+    A seminar in behavioral economics with applications. Topics include: self-control problems in financial behavior, preferences regarding inequality and fairness, cooperative behavior, social preferences, and consumer decision making.
+</details> 
+
+<details>
+  <summary>Real Analysis II</summary>
+    A seminar in real analysis at the level of a first graduate course. Topics include the inverse and implicit function theorems, differential forms, calculus on manifolds, measurability, and Lebesgue integration.
+</details> 
+
+# Prior courses {-}
+## Mathematics
+<details>
+  <summary>Modern Algebra II</summary>
+    A seminar in algebra at the level of a first graduate course. Topics covered include field theory, Galois theory (including the insolvability of the quintic), the Sylow theorems and an introduction to representation theory.
+</details> 
+
+<details>
+  <summary>Topology</summary>
+    A double credit seminar in topology at the level of a first graduate course. Topics include an introduction to point-set, combinatorial, and algebraic topology:  topological spaces, classification of surfaces, the fundamental group, covering spaces, simplicial complexes, and homology (including related algebra).
+</details> 
+
+<details>
+  <summary>Complex Analysis</summary>
+    A seminar in complex analysis at the level of a first graduate course. Topics include analytic functions of a complex variable, Cauchy’s theorem, power series, residue calculus, conformal mapping, harmonic functions, analytic continuation, elliptic functions, and the theory of Weierstrass.
+</details> 
+
+<details>
+  <summary>Mathematical Statistics II</summary>
+    A seminar in mathematical statistics at the level of a first graduate course. Topics include parameter estimation, confidence intervals and hypothesis testing, linear regression methods, Bayesian inference, generalized linear models, and nonparametric statistics.
+</details> 
+
+<details>
+  <summary>Numerical Analysis and Stochastics Methods</summary>
+    An advanced course in applied mathematics
+</details> 
+
+## Economics
+<details>
+  <summary>Intermediate microeconomics</summary>
+</details> 
+
+<details>
+  <summary>Operations Research</summary>
+</details> 
+<!-- I need to add these-->
+## Linguistics
+<details>
+  <summary>Language Learning and Development</summary>
+    A seminar in language acquisition.
+</details> 
+<details>
+  <summary>Structure of Wamesa</summary>
+</details> 
+
+<details>
+  <summary>Modality and Language</summary>
+</details> 
+<!-- I need to add these-->
+## Other
+<details>
+  <summary>Algorithms</summary>
+    An advanced course in algorithmic design. Topics covered include abstract data types, trees (including balanced trees), graphs, searching, sorting, NP complete optimization problems, and the impact of several models of parallel computation on the design of algorithms and data structures.
+</details> 
+<!-- I need to add these-->
